@@ -2,43 +2,59 @@ package com.probability;
 
 import org.junit.Test;
 
-import java.util.Date;
-
 import static org.junit.Assert.*;
 
 public class ProbabilityTest {
+
     @Test
     public void isProbabilityValid_returns_true_when_probability_is_point_9(){
         Chance ch = new Chance(0.9);
         assertTrue(ch.isProbabilityValid());
     }
+
     @Test
     public void isProbabilityValid_returns_false_when_probability_is_1_point_9() {
         Chance ch = new Chance(1.9);
         assertFalse(ch.isProbabilityValid());
     }
+
     @Test
     public void isProbabilityValid_returns_false_when_probability_is_negative() {
         Chance ch = new Chance(-1.9);
         assertFalse(ch.isProbabilityValid());
     }
+    
     @Test
-    public void calculateProbability_does_not_calculate_invalid_probability() {
-        Probability pb = new Probability(9,6);
-        Double pr = pb.calculateProbability();
-        assertNull(pr);
+    public void createProbability_does_not_create_invalid_probability() {
+        Probability pb = Probability.create(9,6);
+        assertNull(pb);
     }
+
     @Test
-    public void calculateProbability_calculates_notNull_probability() {
-        Probability pb = new Probability(4,6);
-        Double pr = pb.calculateProbability();
-        assertNotNull(pr);
+    public void createProbability_creates_valid_probability() {
+        Probability pb = Probability.create(3, 6);
+        assertTrue(pb.equals(Probability.create(3, 6)));
     }
+
     @Test
-    public void calculateProbability_calculates_valid_probability() {
-        Probability pb = new Probability(3,6);
-        Double pr = pb.calculateProbability();
-        assertNotNull(pr);
-        assertEquals(0.5,pr,0.1);
+    public void ProbabilityOfGettingMultipleOf2OnRollOfDiceIs0Point5() {
+        Probability multipleOf2 = Probability.create(3, 6);
+        assertTrue(multipleOf2.equals(Probability.create(1, 2)));
+    }
+
+    @Test
+    public void ProbabilityOfGettingTailsOnBothCoinsIs0Point25() {
+        Probability pbCoin1 = Probability.create(1,2);
+        Probability pbCoin2 = Probability.create(1,2);
+        Probability twoCoins = pbCoin1.and(pbCoin2);
+        assertTrue(twoCoins.equals(Probability.create(1, 4)));
+    }
+
+    @Test
+    public void ProbabilityOfGettingAtLeastOneTailOnTwOCoinsIs0Point75() {
+        Probability pbCoin1 = Probability.create(1,2);
+        Probability pbCoin2 = Probability.create(1,2);
+        Probability twoCoins = pbCoin1.or(pbCoin2);
+        assertTrue(twoCoins.equals(Probability.create(3, 4)));
     }
 }
