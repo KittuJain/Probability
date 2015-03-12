@@ -58,4 +58,10 @@ public class ProbabilityTest {
         Probability twoCoins = pbCoin1.or(pbCoin2);
         assertTrue(twoCoins.equals(Probability.create(3, 4)));
     }
+
+    @Test
+    public void negateNegatesTheProbabilityOfNotGettingTails() {
+        Probability pbCoin = Probability.create(3,4);
+        assertTrue(pbCoin.negate().equals(Probability.create(1, 4)));
+    }
 }

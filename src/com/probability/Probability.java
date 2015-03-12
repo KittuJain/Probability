@@ -1,6 +1,7 @@
 package com.probability;
 
 public class Probability {
+    private static final double CERTAINITY = 1;
     private double probability;
 
 
@@ -39,5 +40,9 @@ public class Probability {
     public int hashCode() {
         long temp = Double.doubleToLongBits(probability);
         return (int) (temp ^ (temp >>> 32));
+    }
+
+    public Probability negate() {
+        return new Probability(CERTAINITY - probability);
     }
 }
