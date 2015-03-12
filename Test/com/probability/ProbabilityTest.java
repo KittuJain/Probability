@@ -33,6 +33,7 @@ public class ProbabilityTest {
     @Test
     public void createProbability_creates_valid_probability() {
         Probability pb = Probability.create(3, 6);
+        assertNotNull(pb);
         assertTrue(pb.equals(Probability.create(3, 6)));
     }
 
