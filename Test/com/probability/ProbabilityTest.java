@@ -64,4 +64,12 @@ public class ProbabilityTest {
         Probability pbCoin = Probability.create(3,4);
         assertTrue(pbCoin.negate().equals(Probability.create(1, 4)));
     }
+
+    @Test
+    public void deMorgesLawIsSatisfiedByNegationConcept() {
+        Probability pbCoin1 = Probability.create(1,2);
+        Probability pbCoin2 = Probability.create(1,2);
+        Probability orTwoCoins = pbCoin1.or(pbCoin2);
+        assertTrue((pbCoin1.negate().and(pbCoin2.negate())).negate().equals(orTwoCoins));
+    }
 }
