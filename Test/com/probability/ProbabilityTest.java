@@ -29,6 +29,12 @@ public class ProbabilityTest {
         assertNull(pr);
     }
     @Test
+    public void calculateProbability_calculates_notNull_probability() {
+        Probability pb = new Probability(4,6);
+        Double pr = pb.calculateProbability();
+        assertNotNull(pr);
+    }
+    @Test
     public void calculateProbability_calculates_valid_probability() {
         Probability pb = new Probability(3,6);
         Double pr = pb.calculateProbability();
